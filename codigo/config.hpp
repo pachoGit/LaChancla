@@ -12,11 +12,17 @@ class Config
     // Ruta hacia la imagen de las chanclas
     static string chanclas_textura;
 
+    // Ruta hacia la imagen de los personajes
+    static string personajes_textura;
+
     // Ancho de la ventana
     static int vancho;
 
     // Alto de la ventana
     static int valto;
+
+    // Velocidad por defecto del jugador (abuela)
+    static double velocidad_defecto_jugador;
 
 };
 

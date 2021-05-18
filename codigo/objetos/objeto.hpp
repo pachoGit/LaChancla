@@ -56,6 +56,11 @@ class Objeto
     // Esta funcion dibuja el objeto (SDL_RenderCopy)
     virtual void dibujar();
 
+    // Regresa el cuadro (frame) de animacion siguiente
+    // @param rect - Posicion y dimensiones del primer cuadro de animacion
+    // @param x    - Cantidad de cuadros a avanzar para el eje x
+    // @param y    - Cantidad de cuadros a avanzar para el eje y
+    // @return     - Posicion y dimensiones del cuadro que deseamos obtener
     SDL_Rect moverRect(const SDL_Rect &rect, int x, int y);
     
 };

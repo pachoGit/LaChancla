@@ -5,17 +5,22 @@
 #include "motor/motor.hpp"
 #include "objetos/objeto.hpp"
 
+#include "estadojuego/juego.hpp"
+
 #define VERSION "1.0.0"
 
 Chancla::Chancla()
 {
     ventana = nullptr;
+    estado_juego = nullptr;
 }
 
 Chancla::~Chancla()
 {
     if (ventana != nullptr)
         SDL_DestroyWindow(ventana);
+    if (estado_juego)
+        delete estado_juego;
 }
 
 void Chancla::correr()
@@ -39,9 +44,7 @@ void Chancla::correr()
     motor.retRenderizador()->cargarTexturas(ventana);
     //motor.retRenderizador()->cargarFuentes();
 
-    Objeto ob(0.0, 0.0, TC_CHANCLA1);
-    Objeto ob2(60.0, 0.0, TC_CHANCLA2);
-    Objeto ob3(120.0, 0.0, TC_CHANCLA3);
+    estado_juego = new Juego;
 
     Uint32 tultimo = SDL_GetTicks();
     Uint32 tactual;
@@ -52,17 +55,12 @@ void Chancla::correr()
         dt = tactual - tultimo;
 
         motor.retRenderizador()->limpiar();
-
+        
         controlarEventos();
+        estado_juego->actualizar(dt);
+        estado_juego->dibujar();
 
-        ob.actualizar(dt);
-        ob.dibujar();
-        ob2.actualizar(dt);
-        ob2.dibujar();
-        ob3.actualizar(dt);
-        ob3.dibujar();
         tultimo = tactual;
-
         motor.retRenderizador()->presentar();
     }
 
@@ -81,8 +79,11 @@ void Chancla::controlarEventos()
     while (SDL_PollEvent(&evento))
     {
         if (evento.type == SDL_QUIT)
+        {
             corriendo = false;
-        //estado_juego->controlarEventos(&evento);
+            std::cout << "El juego duro: " << estado_juego->retTiempo() << std::endl;
+        }
+        estado_juego->controlarEventos(&evento);
     }
     
 }

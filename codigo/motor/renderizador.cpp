@@ -31,11 +31,15 @@ Renderizador::~Renderizador()
 void Renderizador::cargarTexturas(SDL_Window *ventana)
 {
     SDL_Surface *chanclas = nullptr;
+    SDL_Surface *personajes = nullptr;
 
     render = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     chanclas = IMG_Load(Config::chanclas_textura.c_str());
+    personajes = IMG_Load(Config::personajes_textura.c_str());
+
     texturas[IMG_CHANCLAS] = SDL_CreateTextureFromSurface(render, chanclas);
+    texturas[IMG_PERSONAJES] = SDL_CreateTextureFromSurface(render, personajes);
 
     if (!render)
         std::cout << "No se inicio el renderizador" << std::endl;
@@ -47,6 +51,7 @@ void Renderizador::cargarTexturas(SDL_Window *ventana)
     }
 
     SDL_FreeSurface(chanclas);
+    SDL_FreeSurface(personajes);
 }
 
 void Renderizador::limpiar()

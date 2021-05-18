@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "objetos/objeto.hpp"
+#include "estadojuego/estadojuego.hpp"
 
 class Chancla
 {
@@ -13,6 +14,9 @@ class Chancla
 
     // La ventana donde se presenta el juego
     SDL_Window *ventana;
+
+    // El estado de juego
+    EstadoJuego *estado_juego;
 
   public:
 

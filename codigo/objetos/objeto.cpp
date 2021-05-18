@@ -55,7 +55,8 @@ void Objeto::actualizar(Uint32 dt)
     rect_colision.y = posy;
     rect_colision.w = info_cuadro->rect_png.w;
     rect_colision.h = info_cuadro->rect_png.h;
-
+    
+    // Realizar la animacion...si tiene :D
     if (info_cuadro->numero_cuadros > 1)
     {
         tiempo_cuadro += dt;

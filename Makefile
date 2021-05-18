@@ -11,7 +11,7 @@ LIBS = -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
 RECURSOS = texturas/chanclas.png
 DEBUG =
 
-MODULOS = motor  objetos # estado_juego
+MODULOS = motor  objetos estadojuego
 # Directorios donde estan todo el codigo fuente
 DIRS_CODIGO = codigo $(addprefix codigo/, $(MODULOS))
 
