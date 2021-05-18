@@ -9,3 +9,9 @@ int Config::vancho = 1000;
 int Config::valto = 900;
 
 double Config::velocidad_defecto_jugador = 0.35;
+
+double Config::velocidad_chancla1 = 0.15;
+
+double Config::velocidad_chancla2 = 0.25;
+
+double Config::velocidad_chancla3 = 0.35;

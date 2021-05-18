@@ -5,6 +5,7 @@
 
 #include "objeto.hpp"
 #include "chancletazo.hpp"
+#include "../tipos.hpp"
 
 class Jugador : public Objeto
 {
@@ -43,7 +44,7 @@ class Jugador : public Objeto
     void dibujar();
 
     // Chancletazo *disparar();
-    void disparar();
+    void disparar(double x, double y, TipoCuadro tc);
 
 };
 

@@ -13,16 +13,23 @@ class Chancletazo : public Objeto
     // Velocidad de la chancleta
     double velocidad;
 
-    // Posicion x, y desde hacia donde se desea enviar la chancla
+    // La pendiente para el movimiento de la chacla
+    double pendiente;
+
+    // Posicion x0, y0 para la formula de la recta
     SDL_Point referencia;
     
+    // El comportamiento de la chancla va a depender si disparamos hacia lado derecho
+    // o al lado izquierdo del jugador
+    // true - lado derecho
+    // false - lado izquierdo
+    bool lado_disparo;
+
     // Para saber si la chancla choco con algo
     bool choque;
 
     // Para saber si es hora de cambiar de tipo de chancla
     bool cambiar;
-
-    Direccion direccion;
 
     // Constructor
     // @param x - Posicion x

@@ -1,34 +1,39 @@
 #include "chancletazo.hpp"
+#include "../config.hpp"
 
 Chancletazo::Chancletazo(double x, double y, TipoCuadro tc) : Objeto(x, y, tc)
 {
-    velocidad = 0.15;
+    velocidad = Config::velocidad_chancla1;
+    pendiente = 0.0;
+    referencia.x = 0;
+    referencia.y = 0;
     choque = false;
     cambiar = false;
-    direccion = DI_DERECHA;
-    
+    lado_disparo = true;
 }
 
 void Chancletazo::actualizar(Uint32 dt)
 {
     if (!choque)
     {
-        posx += velocidad * dt;
-        posy = 3.20 * posx;
-
-        /*
-        switch (direccion)
+        // Cuando la pendiente no es tan cerrada se toma como "x" para calcular "y"
+        if (pendiente < 2.5 && pendiente > -2.5)
         {
-            case DI_DERECHA:
+            if (lado_disparo)
                 posx += velocidad * dt;
-                break;
-            case DI_IZQUIERDA:
+            else
                 posx -= velocidad * dt;
-                break;
+            posy = pendiente * (posx - referencia.x) + referencia.y;
         }
-        */
+        // Pero cuando la pendiente es cerrada, se toma a "y" para calcular "x"
+        else 
+        {
+            // Aumentamos un poquito la velocidad :D
+            posy -= (velocidad + 0.1) * dt;
+            posx = ((posy - referencia.y) / pendiente) + referencia.x;
+        }
+        
         Objeto::actualizar(dt);
-
     }
 }
 

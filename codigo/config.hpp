@@ -24,6 +24,12 @@ class Config
     // Velocidad por defecto del jugador (abuela)
     static double velocidad_defecto_jugador;
 
+    /** Velocidades para las distintos niveles de chanclas **/
+    static double velocidad_chancla1;
+
+    static double velocidad_chancla2;
+
+    static double velocidad_chancla3;
 };
 
 
