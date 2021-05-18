@@ -15,8 +15,6 @@ class Juego : public EstadoJuego
     Timer timer;
 
     Jugador *abuela;
-
-    Chancletazo *chancla;
     
   public:
 
@@ -36,6 +34,11 @@ class Juego : public EstadoJuego
 
     // Retorna el tiempo que se estuvo dentro del juego
     int retTiempo();
+
+    // Chequear si la bala salio de la ventana de juego
+    // @param chancla - Chancletazo que debe verificar
+    void verColisionConLaVentana(Chancletazo *chancla);
+
 };
 
 

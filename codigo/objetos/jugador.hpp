@@ -38,6 +38,9 @@ class Jugador : public Objeto
     
     ~Jugador();
 
+    // Retorna la lista de balas
+    std::vector<Chancletazo *> retChancletazos() const;
+
     // Actualiza la animacion del jugador y verifica el estado de las teclas presionadas
     void actualizar(Uint32 dt);
 

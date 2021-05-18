@@ -8,8 +8,6 @@ Juego::Juego()
     corriendo = true;
     timer.iniciar();
     abuela = new Jugador(((Config::vancho - 60) / 2), Config::valto - 60, TC_ABUELA);
-    //abuela = new Jugador(80.0, 80.0, TC_ABUELA);
-    //chancla = new Chancletazo(0.0, 0.0, TC_CHANCLA1);
 }
 
 Juego::~Juego()
@@ -42,6 +40,8 @@ void Juego::controlarEventos(SDL_Event *evento)
 void Juego::actualizar(Uint32 dt)
 {
     abuela->actualizar(dt);
+    for (auto &chancla : abuela->retChancletazos())
+        verColisionConLaVentana(chancla);
 }
 
 void Juego::dibujar()
@@ -57,4 +57,13 @@ EstadoJuego *Juego::siguienteEstado()
 int Juego::retTiempo()
 {
     return timer.tiempoTrancurrido();
+}
+
+void Juego::verColisionConLaVentana(Chancletazo *chancla)
+{
+    if ((chancla->rect_ventana.x > Config::vancho ||
+         (chancla->rect_ventana.x + 60) < 0) ||
+        (chancla->rect_ventana.y > Config::valto ||
+         ((chancla->rect_ventana.y + 60) < 0)))
+        chancla->borrar = true;
 }

@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <stdio.h>
+#include <algorithm>
 
 #include "jugador.hpp"
 #include "../config.hpp"
@@ -19,6 +20,11 @@ Jugador::~Jugador()
     if (!chancletazos.empty())
         for (auto &chancla : chancletazos)
             delete chancla;
+}
+
+std::vector<Chancletazo *> Jugador::retChancletazos() const
+{
+    return chancletazos;
 }
 
 void Jugador::actualizar(Uint32 dt)
@@ -89,6 +95,17 @@ void Jugador::actualizar(Uint32 dt)
         return;
     for (auto &chancla : chancletazos)
         chancla->actualizar(dt);
+
+    // Verificamos si debemos eliminar las balas (chanclas)
+    chancletazos.erase(std::remove_if(chancletazos.begin(), chancletazos.end(), [](Chancletazo *c)
+                                                                                {
+                                                                                    if (c->borrar)
+                                                                                    {
+                                                                                        delete c;
+                                                                                        return true;
+                                                                                    }
+                                                                                    return false;
+                                                                                }), chancletazos.end());
 }
 
 void Jugador::dibujar()
@@ -102,6 +119,7 @@ void Jugador::dibujar()
 
 void Jugador::disparar(double x, double y, TipoCuadro tc)
 {
+    std::cout << "Cantidad de balas hasta ahora: " << chancletazos.size() << std::endl;
     debe_disparar = true;
     Chancletazo *nuevo;
     if (tc == TC_CHANCLA1)
