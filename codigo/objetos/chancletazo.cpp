@@ -12,6 +12,11 @@ Chancletazo::Chancletazo(double x, double y, TipoCuadro tc) : Objeto(x, y, tc)
     lado_disparo = true;
 }
 
+Chancletazo::~Chancletazo()
+{
+}
+
+
 void Chancletazo::actualizar(Uint32 dt)
 {
     if (!choque)

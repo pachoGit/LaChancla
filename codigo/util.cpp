@@ -10,3 +10,10 @@ int Timer::tiempoTrancurrido()
     int tiempo = (int) SDL_GetTicks() - inicio;
     return tiempo / 1000; // Convertimos a segundos
 }
+
+double Timer::tiempoTrancurridoD()
+{
+    double tiempo = (double) SDL_GetTicks() - inicio;
+    return tiempo / 1000.0; // Convertimos a segundos
+}
+

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 #include "juego.hpp"
 #include "../config.hpp"
@@ -8,11 +9,20 @@ Juego::Juego()
     corriendo = true;
     timer.iniciar();
     abuela = new Jugador(((Config::vancho - 60) / 2), Config::valto - 60, TC_ABUELA);
+
+    enemigos.push_back(new Enemigo(0.0, 0.0, TC_PERSONAJE1));
+    enemigos.push_back(new Enemigo(70.0, 0.0, TC_PERSONAJE2));
 }
 
 Juego::~Juego()
 {
     delete abuela;
+    if (!enemigos.empty())
+    {
+        for (auto &enemigo : enemigos)
+            delete enemigo;
+        enemigos.clear();
+    }
 }
 
 bool Juego::estaCorriendo() const
@@ -33,20 +43,41 @@ void Juego::controlarEventos(SDL_Event *evento)
             abuela->disparar((double) x, (double) y, TC_CHANCLA2);
         else
             abuela->disparar((double) x, (double) y, TC_CHANCLA3);
-            
     }
 }
 
 void Juego::actualizar(Uint32 dt)
 {
-    abuela->actualizar(dt);
+    for (auto &chancla : abuela->retChancletazos())
+        for (auto &enemigo : enemigos)
+            verColisionChanclaConEnemigo(chancla, enemigo);
+
     for (auto &chancla : abuela->retChancletazos())
         verColisionConLaVentana(chancla);
+
+    // Actualizar los objetos
+    abuela->actualizar(dt);
+
+    for (auto &enemigo : enemigos)
+        enemigo->actualizar(dt);
+
+    // Verficamos si hay alguien
+    enemigos.erase(std::remove_if(enemigos.begin(), enemigos.end(), [](Enemigo *e)
+                                                                    {
+                                                                        if (e->borrar)
+                                                                        {
+                                                                            delete e;
+                                                                            return true;
+                                                                        }
+                                                                        return false;
+                                                                    }), enemigos.end());
 }
 
 void Juego::dibujar()
 {
     abuela->dibujar();
+    for (auto &enemigo : enemigos)
+        enemigo->dibujar();
 }
 
 EstadoJuego *Juego::siguienteEstado()
@@ -58,6 +89,19 @@ int Juego::retTiempo()
 {
     return timer.tiempoTrancurrido();
 }
+
+void Juego::verColisionChanclaConEnemigo(Chancletazo *chancla, Enemigo *enemigo)
+{
+    if ((chancla->rect_ventana.x >= enemigo->rect_ventana.x &&
+         chancla->rect_ventana.x <= enemigo->rect_ventana.x + enemigo->rect_ventana.w) &&
+        (chancla->rect_ventana.y >= enemigo->rect_ventana.y &&
+         chancla->rect_ventana.y <= enemigo->rect_ventana.y + enemigo->rect_ventana.h))
+    {
+        chancla->borrar = true;
+        enemigo->borrar = true;
+    }
+}
+
 
 void Juego::verColisionConLaVentana(Chancletazo *chancla)
 {

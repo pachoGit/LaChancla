@@ -19,6 +19,10 @@ class Timer
     // @return - Tiempo transcurrido en segundos
     int tiempoTrancurrido();
 
+    // Calcula el tiempo que ha pasado desde que se inicio el timer 
+    // @return - Tiempo transcurrido en segundos en formato double
+    double tiempoTrancurridoD();
+
 };
 
 #endif /* UTIL_HPP */

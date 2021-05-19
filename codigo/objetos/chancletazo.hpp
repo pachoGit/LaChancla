@@ -37,8 +37,12 @@ class Chancletazo : public Objeto
     // @param tc - Tipo de chancleta a utilizar
     Chancletazo(double x, double y, TipoCuadro tc);
 
+    ~Chancletazo();
+
+    // Modifica las posiciones y dimensiones de la animacion
     void actualizar(Uint32 dt);
 
+    // 
     void destruir();
 
 };
