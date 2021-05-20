@@ -22,7 +22,10 @@ class Juego : public EstadoJuego
     
     // Lista de enemigos presentes en la ventana
     std::vector<Enemigo *> enemigos;
-    
+
+    // Este el timer para la generacion de enemigos
+    Timer timerEnemigo;
+
   public:
 
     Juego();
@@ -49,8 +52,11 @@ class Juego : public EstadoJuego
 
     // Chequear si la bala salio de la ventana de juego
     // @param chancla - Chancletazo que debe verificar
-    void verColisionConLaVentana(Chancletazo *chancla);
+    //void verColisionConLaVentana(Chancletazo *chancla);
+    void verColisionConLaVentana(Objeto *objeto);
 
+    // Generar un nuevo enemigo
+    void generarEnemigo();
 };
 
 

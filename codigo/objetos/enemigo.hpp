@@ -11,6 +11,9 @@ class Enemigo : public Objeto
     double velocidad;
 
     Timer timer;
+
+    // Posicion inicial del enemigo
+    double posy_inicial;
     
   public:
     
