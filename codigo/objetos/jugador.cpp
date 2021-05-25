@@ -119,7 +119,7 @@ void Jugador::dibujar()
 
 void Jugador::disparar(double x, double y, TipoCuadro tc)
 {
-    std::cout << "Cantidad de balas hasta ahora: " << chancletazos.size() << std::endl;
+    //std::cout << "Cantidad de balas hasta ahora: " << chancletazos.size() << std::endl;
     debe_disparar = true;
     Chancletazo *nuevo;
     if (tc == TC_CHANCLA1)

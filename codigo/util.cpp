@@ -27,3 +27,13 @@ int Timer::tiempoTrancurridoMili()
 {
     return ((int) SDL_GetTicks() - inicio);
 }
+
+ElementoMenu::ElementoMenu(std::string c) : contenido(c)
+{
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 0;
+    rect.h = 0;
+    
+}
+

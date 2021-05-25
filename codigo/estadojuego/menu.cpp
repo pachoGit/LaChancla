@@ -18,7 +18,6 @@ Menu::Menu()
     Motor::retMotor().retRenderizador()->retDimensionTexto(comenzar->contenido, &comenzar->rect.w, &comenzar->rect.h);
 
     // Calcular las posiciones de los textos
-
     titulo->rect.x = (Config::vancho - titulo->rect.w) / 2;
     titulo->rect.y = 50;
     cuerpo->rect.x = (Config::vancho - cuerpo->rect.w) / 2;
@@ -75,9 +74,4 @@ void Menu::dibujar()
 EstadoJuego *Menu::siguienteEstado()
 {
     return new Juego;
-}
-
-int Menu::retTiempo()
-{
-    return 10;
 }

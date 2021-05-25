@@ -35,7 +35,6 @@ class EstadoJuego
     // un objeto de la clase "Juego" y viceversa
     virtual EstadoJuego *siguienteEstado() = 0;
 
-    virtual int retTiempo() = 0;
 };
 
 #endif /* ESTADOJUEGO_HPP */

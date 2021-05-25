@@ -2,6 +2,7 @@
 #define UTIL_HPP
 
 #include <SDL2/SDL.h>
+#include <string>
 
 /* Clases utiles para el juego */
 
@@ -29,6 +30,17 @@ class Timer
     // Calcula el tiempo que ha pasado desde que se inicio el timer 
     // @return - Tiempo transcurrido en segundos en milisegundos
     int tiempoTrancurridoMili();
+};
+
+// Esto sirve para dibujar texto
+class ElementoMenu
+{
+  public:
+
+    std::string contenido;
+    SDL_Rect rect;
+
+    ElementoMenu(std::string c);
 };
 
 #endif /* UTIL_HPP */

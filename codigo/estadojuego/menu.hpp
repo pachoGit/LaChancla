@@ -7,21 +7,6 @@
 #include "estadojuego.hpp"
 #include "../util.hpp"
 
-struct ElementoMenu
-{
-    std::string contenido;
-    SDL_Rect rect;
-
-    ElementoMenu(std::string c) : contenido(c)
-    {
-        rect.x = 0;
-        rect.y = 0;
-        rect.w = 0;
-        rect.h = 0;
-    }
-    
-};
-
 class Menu : public EstadoJuego
 {
   private:
@@ -56,8 +41,6 @@ class Menu : public EstadoJuego
     void dibujar();
 
     EstadoJuego *siguienteEstado();
-    
-    int retTiempo();
 };
 
 #endif /* MENU_HPP */

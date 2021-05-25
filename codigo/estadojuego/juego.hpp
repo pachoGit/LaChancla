@@ -29,6 +29,9 @@ class Juego : public EstadoJuego
     // Cantidad de fallos hasta el momento
     int fallos;
 
+    // Cantidad de enemigos eliminados
+    int enemigosEliminados;
+
   public:
 
     Juego();
@@ -44,9 +47,6 @@ class Juego : public EstadoJuego
     void dibujar();
 
     EstadoJuego *siguienteEstado();
-
-    // Retorna el tiempo que se estuvo dentro del juego
-    int retTiempo();
 
     // Chequear si la bala choco contra un enemigo
     // @param chancla - Chancletazo

@@ -88,10 +88,7 @@ void Chancla::controlarEventos()
     while (SDL_PollEvent(&evento))
     {
         if (evento.type == SDL_QUIT)
-        {
             corriendo = false;
-            //std::cout << "El juego duro: " << estado_juego->retTiempo() << std::endl;
-        }
         estado_juego->controlarEventos(&evento);
     }
     

@@ -4,9 +4,9 @@
 #include <typeinfo> // Para typeid
 #include <string>
 
-
-#include "juego.hpp"
 #include "../config.hpp"
+#include "juego.hpp"
+#include "puntaje.hpp"
 
 #define TIEMPO_NIVEL1 120 // El primer nivel sera hasta los primeros 2 minutos
 #define TIEMPO_NIVEL2 360 // El primer nivel sera desde el minutos 2 hasta el minuto 6, y el 3 nivel es el resto
@@ -28,6 +28,7 @@ Juego::Juego()
     abuela = new Jugador(((Config::vancho - 60) / 2), Config::valto - 60, TC_ABUELA);
     timerEnemigo.iniciar();
     fallos = 0;
+    enemigosEliminados = 0;
 }
 
 Juego::~Juego()
@@ -104,12 +105,7 @@ void Juego::dibujar()
 
 EstadoJuego *Juego::siguienteEstado()
 {
-    return nullptr;
-}
-
-int Juego::retTiempo()
-{
-    return timer.tiempoTrancurrido();
+    return new Puntaje(timer.tiempoTrancurrido(), enemigosEliminados);
 }
 
 void Juego::verColisionChanclaConEnemigo(Chancletazo *chancla, Enemigo *enemigo)
@@ -126,6 +122,7 @@ void Juego::verColisionChanclaConEnemigo(Chancletazo *chancla, Enemigo *enemigo)
     {
         chancla->borrar = true;
         enemigo->borrar = true;
+        enemigosEliminados++;
     }
 }
 
@@ -155,13 +152,10 @@ void Juego::verColisionConLaVentana(Objeto *objeto)
         // para las chanclas y otras para los enemigos que al final ambas hagan los mismo
         // la unica diferencia es que en una debemos hacer una cosa mas :D
         if (typeid(*objeto) == typeid(Enemigo))
-        {
-            std::cout << "Enemigo gano: ";
             fallos++;
-            std::cout << fallos << std::endl;
-        }
         // Aqui el fin del juego
-        //if (fallos >= MAX_FALLOS)
+        if (fallos >= MAX_FALLOS)
+            corriendo = false;
     }
 }
 
