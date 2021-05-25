@@ -6,6 +6,7 @@
 #include "objetos/objeto.hpp"
 
 #include "estadojuego/juego.hpp"
+#include "estadojuego/menu.hpp"
 
 #define VERSION "1.0.0"
 
@@ -44,7 +45,7 @@ void Chancla::correr()
     motor.retRenderizador()->cargarTexturas(ventana);
     motor.retRenderizador()->cargarFuentes();
 
-    estado_juego = new Juego;
+    estado_juego = new Menu;
 
     Uint32 tultimo = SDL_GetTicks();
     Uint32 tactual;
@@ -56,6 +57,14 @@ void Chancla::correr()
 
         motor.retRenderizador()->limpiar();
         
+        if (!estado_juego->estaCorriendo())
+        {
+            EstadoJuego *nuevo_estado = estado_juego->siguienteEstado();
+            delete estado_juego;
+            estado_juego = nuevo_estado;
+            
+        }
+
         controlarEventos();
         estado_juego->actualizar(dt);
         estado_juego->dibujar();
@@ -81,7 +90,7 @@ void Chancla::controlarEventos()
         if (evento.type == SDL_QUIT)
         {
             corriendo = false;
-            std::cout << "El juego duro: " << estado_juego->retTiempo() << std::endl;
+            //std::cout << "El juego duro: " << estado_juego->retTiempo() << std::endl;
         }
         estado_juego->controlarEventos(&evento);
     }

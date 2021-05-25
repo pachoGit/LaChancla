@@ -8,7 +8,7 @@ CC = g++
 LBANDERAS = -O
 CBANDERAS = -c -Wall -Wextra -std=c++17
 LIBS = -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
-RECURSOS = texturas/chanclas.png
+RECURSOS = texturas/chanclas.png fuentes/OpenSans-Regular.ttf
 DEBUG =
 
 MODULOS = motor  objetos estadojuego

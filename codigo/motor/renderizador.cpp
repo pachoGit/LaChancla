@@ -62,7 +62,8 @@ void Renderizador::cargarFuentes()
 
 void Renderizador::limpiar()
 {
-    SDL_SetRenderDrawColor(render, 0x0F, 0x1C, 0x3B, 0x56);
+    // SDL_SetRenderDrawColor(render, 0x0F, 0x1C, 0x3B, 0x56);
+    SDL_SetRenderDrawColor(render, 0x2D, 0x77, 0xB8, 0x56);
     SDL_RenderClear(render);
 }
 
@@ -76,7 +77,7 @@ void Renderizador::dibujarObjeto(const SDL_Rect *rect_png, const SDL_Rect *rect_
     SDL_RenderCopy(render, texturas.at(ti), rect_png, rect_ventana);
 }
 
-void Renderizador::dibujarTexto(SDL_Point *comienzo, std::string texto, SDL_Color color)
+void Renderizador::dibujarTexto(SDL_Point comienzo, std::string texto, SDL_Color color)
 {
     if (!fuente_general)
         return;
@@ -89,11 +90,16 @@ void Renderizador::dibujarTexto(SDL_Point *comienzo, std::string texto, SDL_Colo
     if (!ttexto)
         return;
     SDL_Rect rect_final;
-    rect_final.x = comienzo->x;
-    rect_final.y = comienzo->y;
+    rect_final.x = comienzo.x;
+    rect_final.y = comienzo.y;
     SDL_QueryTexture(ttexto, nullptr, nullptr, &rect_final.w, &rect_final.h);
 
     SDL_RenderCopy(render, ttexto, nullptr, &rect_final);
 
     SDL_DestroyTexture(ttexto);
+}
+
+void Renderizador::retDimensionTexto(std::string texto, int *ancho, int *alto)
+{
+    TTF_SizeText(fuente_general, texto.c_str(), ancho, alto);
 }

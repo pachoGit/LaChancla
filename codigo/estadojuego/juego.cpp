@@ -8,8 +8,8 @@
 #include "juego.hpp"
 #include "../config.hpp"
 
-#define TIEMPO_NIVEL1 180 // El primer nivel sera hasta los primeros 3 minutos
-#define TIEMPO_NIVEL2 360 // El primer nivel sera desde el minutos 3 hasta el minuto 6, y el 3 nivel es el resto
+#define TIEMPO_NIVEL1 120 // El primer nivel sera hasta los primeros 2 minutos
+#define TIEMPO_NIVEL2 360 // El primer nivel sera desde el minutos 2 hasta el minuto 6, y el 3 nivel es el resto
 
 #define MAX_FALLOS 5 // Cantidad maxima de enemigos que debemos dejar :D
 
