@@ -26,6 +26,9 @@ class Juego : public EstadoJuego
     // Este el timer para la generacion de enemigos
     Timer timerEnemigo;
 
+    // Cantidad de fallos hasta el momento
+    int fallos;
+
   public:
 
     Juego();

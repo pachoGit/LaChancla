@@ -42,7 +42,7 @@ void Chancla::correr()
     Motor &motor = Motor::retMotor();
     motor.iniciarModulos();
     motor.retRenderizador()->cargarTexturas(ventana);
-    //motor.retRenderizador()->cargarFuentes();
+    motor.retRenderizador()->cargarFuentes();
 
     estado_juego = new Juego;
 

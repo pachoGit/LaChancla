@@ -57,7 +57,8 @@ class Renderizador
     // texto - Contenido para mostrar
     // color - Color del texto
     // tam - Tamanio del texto
-    void dibujarTexto(SDL_Point *comienzo, std::string texto, SDL_Color color, int tam);
+    // void dibujarTexto(SDL_Point *comienzo, std::string texto, SDL_Color color, int tam);
+    void dibujarTexto(SDL_Point *comienzo, std::string texto, SDL_Color color);
 
     TTF_Font *retFuenteGeneral() const;
 

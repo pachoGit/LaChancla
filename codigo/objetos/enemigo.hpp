@@ -14,6 +14,8 @@ class Enemigo : public Objeto
 
     // Posicion inicial del enemigo
     double posy_inicial;
+
+    double gravedad;
     
   public:
     

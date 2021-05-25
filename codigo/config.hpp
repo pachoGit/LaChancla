@@ -30,7 +30,10 @@ class Config
     static double velocidad_chancla2;
 
     static double velocidad_chancla3;
+
+    static string path_fuente_general;
 };
+
 
 
 #endif /* CONFIG_HPP */
