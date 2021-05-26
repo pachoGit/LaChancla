@@ -1,0 +1,12 @@
+Instalación:
+
+LINUX:
+
+1. Descargar las librerías necesarias:
+sudo apt install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
+
+2. Ejecutar el archivo Makefile en la carpeta Chancla:
+   make
+
+3. Ingresar a la carpeta Chancla/producto/binario y realizar:
+   ./Chancla

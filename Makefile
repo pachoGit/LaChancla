@@ -6,7 +6,7 @@ DIR_RECURSOS = recursos
 
 CC = g++
 LBANDERAS = -O
-CBANDERAS = -c -Wall -Wextra -std=c++17
+CBANDERAS = -c -Wall -Wextra -std=c++17 -fPIC
 LIBS = -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image
 RECURSOS = texturas/chanclas.png fuentes/OpenSans-Regular.ttf
 DEBUG =
