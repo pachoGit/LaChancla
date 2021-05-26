@@ -41,7 +41,7 @@ void Jugador::actualizar(Uint32 dt)
     rect_colision.h = info_cuadro->rect_png.h;
 
     // Realizar la animacion de disparar
-    if (debe_disparar) // Tambien se puede agregar un tiempo de espera entre disparos
+    if (debe_disparar)
     {
         tiempo_cuadro += dt;
         if (tiempo_cuadro > info_cuadro->duracion_cuadro)
@@ -83,9 +83,13 @@ void Jugador::actualizar(Uint32 dt)
         {
             case DI_DERECHA:
                 posx += velocidad * dt;
+                if (posx + info_cuadro->rect_png.w >= Config::vancho)
+                    posx = Config::vancho - info_cuadro->rect_png.w; 
                 break;
             case DI_IZQUIERDA:
                 posx -= velocidad * dt;
+                if (posx <= 0)
+                    posx = 0.0;
                 break;
         }
     }

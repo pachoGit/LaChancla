@@ -15,16 +15,20 @@ class Juego : public EstadoJuego
 
     bool corriendo;
     
+    // Timer general del juego, mide cuanto tiempo estamos jugando
     Timer timer;
+
+    // Timer que mide que tiempo paso desde el ultimo disparo
+    Timer timer_ult_disparo;
+
+    // Este el timer para la generacion de enemigos
+    Timer timerEnemigo;
 
     // Jugador principal
     Jugador *abuela;
     
     // Lista de enemigos presentes en la ventana
     std::vector<Enemigo *> enemigos;
-
-    // Este el timer para la generacion de enemigos
-    Timer timerEnemigo;
 
     // Cantidad de fallos hasta el momento
     int fallos;

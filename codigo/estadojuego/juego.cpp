@@ -25,8 +25,9 @@ Juego::Juego()
 {
     corriendo = true;
     timer.iniciar();
-    abuela = new Jugador(((Config::vancho - 60) / 2), Config::valto - 60, TC_ABUELA);
+    timer_ult_disparo.iniciar();
     timerEnemigo.iniciar();
+    abuela = new Jugador(((Config::vancho - 60) / 2), Config::valto - 60, TC_ABUELA);
     fallos = 0;
     enemigosEliminados = 0;
 }
@@ -49,8 +50,10 @@ bool Juego::estaCorriendo() const
 
 void Juego::controlarEventos(SDL_Event *evento)
 {
-    // Si se presiona el buton izquierdo del mouse se debe disparar
-    if (evento->type == SDL_MOUSEBUTTONDOWN && evento->button.button == SDL_BUTTON_LEFT)
+    // Si se presiona el buton izquierdo del mouse se debe disparar (cada medio segundo)
+    if (evento->type == SDL_MOUSEBUTTONDOWN &&
+        evento->button.button == SDL_BUTTON_LEFT &&
+        timer_ult_disparo.tiempoTrancurridoMili() >= 500)
     {
         int x, y;
         SDL_GetMouseState(&x, &y);
@@ -60,6 +63,7 @@ void Juego::controlarEventos(SDL_Event *evento)
             abuela->disparar((double) x, (double) y, TC_CHANCLA2);
         else
             abuela->disparar((double) x, (double) y, TC_CHANCLA3);
+        timer_ult_disparo.reiniciar();
     }
 }
 
@@ -161,7 +165,13 @@ void Juego::verColisionConLaVentana(Objeto *objeto)
 
 void Juego::generarEnemigo()
 {
-    if (timerEnemigo.tiempoTrancurridoMili() > 1000)
+    int tiempoGenerar; // Tiempo para generar enemigos
+    if (timer.tiempoTrancurrido() >= TIEMPO_NIVEL1)
+        tiempoGenerar = 1300;
+    else
+        tiempoGenerar = 900;
+
+    if (timerEnemigo.tiempoTrancurridoMili() > tiempoGenerar)
     {
         TipoCuadro tc;
         int x = distribucionPosEnemigo(generador);

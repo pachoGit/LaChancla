@@ -11,7 +11,14 @@ Puntaje::Puntaje(int t, int p)
     puntos = p;
     mfin = new ElementoMenu("FIN DEL JUEGO");
     mresultados = new ElementoMenu("RESULTADOS:");
-    mtiempo = new ElementoMenu("Tiempo: " + std::to_string(tiempo));
+    int minutos = tiempo / 60;
+    int segundos = tiempo % 60;
+    if (minutos < 10 && segundos > 10)
+        mtiempo = new ElementoMenu("Tiempo: 0" + std::to_string(minutos) + ":" + std::to_string(segundos));
+    else if (minutos < 10 && segundos < 10)
+        mtiempo = new ElementoMenu("Tiempo: 0" + std::to_string(minutos) + ":0" + std::to_string(segundos));
+    else
+        mtiempo = new ElementoMenu("Tiempo: " + std::to_string(minutos) + ":" + std::to_string(segundos));
     mpuntos = new ElementoMenu("Haraganes: " + std::to_string(puntos));
     menter = new ElementoMenu("Presiona ENTER para repetir");
     otra_partida = false;
