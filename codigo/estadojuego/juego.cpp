@@ -81,7 +81,7 @@ void Juego::actualizar(Uint32 dt)
     for (auto &enemigo : enemigos)
         enemigo->actualizar(dt);
 
-    // Verficamos si hay alguien
+    // Verficamos si hay algun enemigo que se debe eliminar
     enemigos.erase(std::remove_if(enemigos.begin(), enemigos.end(), [](Enemigo *e)
                                                                     {
                                                                         if (e->borrar)
@@ -92,7 +92,7 @@ void Juego::actualizar(Uint32 dt)
                                                                         return false;
                                                                     }), enemigos.end());
 
-    // Generamos un enemigo cada 2 segundos
+    // Generamos un enemigo cada 1 segundos
     generarEnemigo();
 }
 
@@ -185,7 +185,7 @@ void Juego::generarEnemigo()
                 break;
         }
         Enemigo *nuevo = new Enemigo((double) x , -60.0, tc);
-        // Cambiar las habilidades de nuevo
+        // TODO: Cambiar las habilidades de nuevo, dependiendo del tiempo de juego
         enemigos.push_back(nuevo);
         timerEnemigo.reiniciar();
     }

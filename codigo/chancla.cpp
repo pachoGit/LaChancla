@@ -55,21 +55,25 @@ void Chancla::correr()
         tactual = SDL_GetTicks();
         dt = tactual - tultimo;
 
-        motor.retRenderizador()->limpiar();
+        // Esto seria mejor dentro de cada estado, pero como es el mismo fondo, da igual
+        motor.retRenderizador()->limpiar(); 
         
         if (!estado_juego->estaCorriendo())
         {
             EstadoJuego *nuevo_estado = estado_juego->siguienteEstado();
             delete estado_juego;
             estado_juego = nuevo_estado;
-            
         }
+        if (estado_juego == nullptr)
+            break;
 
         controlarEventos();
         estado_juego->actualizar(dt);
         estado_juego->dibujar();
 
         tultimo = tactual;
+
+        // Esto seria mejor dentro de cada estado
         motor.retRenderizador()->presentar();
     }
 

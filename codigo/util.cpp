@@ -34,6 +34,8 @@ ElementoMenu::ElementoMenu(std::string c) : contenido(c)
     rect.y = 0;
     rect.w = 0;
     rect.h = 0;
-    
 }
 
+ElementoMenu::~ElementoMenu()
+{
+}

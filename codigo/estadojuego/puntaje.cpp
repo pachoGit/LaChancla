@@ -1,3 +1,4 @@
+#include "juego.hpp"
 #include "../config.hpp"
 #include "puntaje.hpp"
 #include "../motor/motor.hpp"
@@ -12,12 +13,15 @@ Puntaje::Puntaje(int t, int p)
     mresultados = new ElementoMenu("RESULTADOS:");
     mtiempo = new ElementoMenu("Tiempo: " + std::to_string(tiempo));
     mpuntos = new ElementoMenu("Haraganes: " + std::to_string(puntos));
+    menter = new ElementoMenu("Presiona ENTER para repetir");
+    otra_partida = false;
 
     // Obtener las dimensiones de los textos
     Motor::retMotor().retRenderizador()->retDimensionTexto(mfin->contenido, &mfin->rect.w, &mfin->rect.h);
     Motor::retMotor().retRenderizador()->retDimensionTexto(mresultados->contenido, &mresultados->rect.w, &mresultados->rect.h);
     Motor::retMotor().retRenderizador()->retDimensionTexto(mtiempo->contenido, &mtiempo->rect.w, &mtiempo->rect.h);
     Motor::retMotor().retRenderizador()->retDimensionTexto(mpuntos->contenido, &mpuntos->rect.w, &mpuntos->rect.h);
+    Motor::retMotor().retRenderizador()->retDimensionTexto(menter->contenido, &menter->rect.w, &menter->rect.h);
 
     // Calcular las posiciones de los textos
     mfin->rect.x = (Config::vancho - mfin->rect.w) / 2;
@@ -33,10 +37,14 @@ Puntaje::Puntaje(int t, int p)
     // 10 pixeles mas abajo que el de arriba
     mpuntos->rect.y = mtiempo->rect.y + mtiempo->rect.h + 10;
 
+    menter->rect.x = (Config::vancho - menter->rect.w) / 2; // En el centro
+    // 10 pixeles mas abajo que el de arriba
+    menter->rect.y = mpuntos->rect.y + mpuntos->rect.h + 10;
 }
 
 Puntaje::~Puntaje()
 {
+    /*
     if (mfin)
         delete mfin;
     if (mresultados)
@@ -45,6 +53,7 @@ Puntaje::~Puntaje()
         delete mtiempo;
     if (mpuntos)
         delete mpuntos;
+    */
 }
 
 bool Puntaje::estaCorriendo() const
@@ -54,6 +63,11 @@ bool Puntaje::estaCorriendo() const
 
 void Puntaje::controlarEventos(SDL_Event *evento)
 {
+    if (evento->type == SDL_KEYDOWN && evento->key.keysym.sym == SDLK_RETURN)
+    {
+        corriendo = false;
+        otra_partida = true;
+    }
 }
 
 void Puntaje::actualizar(Uint32 dt)
@@ -70,11 +84,16 @@ void Puntaje::dibujar()
     render->dibujarTexto({mresultados->rect.x, mresultados->rect.y}, mresultados->contenido, c);
     render->dibujarTexto({mtiempo->rect.x, mtiempo->rect.y}, mtiempo->contenido, c);
     render->dibujarTexto({mpuntos->rect.x, mpuntos->rect.y}, mpuntos->contenido, c);
-    
+    render->dibujarTexto({menter->rect.x, menter->rect.y}, menter->contenido, c);
 }
 
 EstadoJuego *Puntaje::siguienteEstado()
 {
+    if (otra_partida)
+    {
+        Juego *j = new Juego;
+        return j;
+    }
     return nullptr;
 }
             

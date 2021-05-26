@@ -41,6 +41,8 @@ class ElementoMenu
     SDL_Rect rect;
 
     ElementoMenu(std::string c);
+
+    ~ElementoMenu();
 };
 
 #endif /* UTIL_HPP */

@@ -22,11 +22,16 @@ class Puntaje : public EstadoJuego
     // El mensaje de la cantidad de enemigos que elimino
     ElementoMenu *mpuntos;
 
+    // El mensaje de presionar enter para jugar de nuevo
+    ElementoMenu *menter;
+
     // El tiempo que ha durado la partida
     int tiempo;
 
     // El total de enemigos que ha vencido
     int puntos;
+
+    bool otra_partida;
 
   public:
 
