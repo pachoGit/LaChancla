@@ -32,6 +32,8 @@ class Config
     static double velocidad_chancla3;
 
     static string path_fuente_general;
+
+    static string audio_explosion;
 };
 
 

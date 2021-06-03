@@ -28,10 +28,19 @@ void Chancla::correr()
 {
     corriendo = true;
     
-    if (SDL_Init(SDL_INIT_VIDEO || SDL_INIT_TIMER) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) != 0)
         return;
+
+
     ventana = SDL_CreateWindow("Chancla", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
                                Config::vancho, Config::valto, SDL_WINDOW_SHOWN);
+
+    
+    if (Mix_Init(MIX_INIT_OGG | MIX_INIT_MP3) == 0)
+    {
+        std::cout << "Error al cargar los modulos de audio" << std::endl;
+        return;
+    }
 
     if (!ventana)
         return;
@@ -44,6 +53,7 @@ void Chancla::correr()
     motor.iniciarModulos();
     motor.retRenderizador()->cargarTexturas(ventana);
     motor.retRenderizador()->cargarFuentes();
+    motor.retRenderizador()->iniciarCargarAudio();
 
     estado_juego = new Menu;
 
@@ -80,6 +90,7 @@ void Chancla::correr()
     motor.destruirModulos();
     SDL_DestroyWindow(ventana);
     ventana = nullptr;
+    Mix_Quit();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();

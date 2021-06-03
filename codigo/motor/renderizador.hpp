@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <string>
 #include <map>
 
@@ -27,6 +28,9 @@ class Renderizador
 
     // Fuente para el texto para mostrar los FPS
     TTF_Font *fuente_fps;
+
+    // El sonido de explosion de los enemigos
+    Mix_Chunk *explosion;
 
   public:
 
@@ -65,6 +69,13 @@ class Renderizador
     // @param ancho - Puntero a un entero donde se guardara el ancho de la textura del texto
     // @param alto -  Puntero a un entero donde se guardara el alto de la textura del texto
     void retDimensionTexto(std::string texto, int *ancho, int *alto);
+
+    // Inicia y carga los sonidos
+    void iniciarCargarAudio();
+
+    // Reproducir el audio
+    void reproducir();
+
 };
 
 

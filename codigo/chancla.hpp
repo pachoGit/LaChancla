@@ -2,6 +2,7 @@
 #define CHANCLA_HPP
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include "objetos/objeto.hpp"
 #include "estadojuego/estadojuego.hpp"
 

@@ -17,3 +17,5 @@ double Config::velocidad_chancla2 = 0.25;
 double Config::velocidad_chancla3 = 0.35;
 
 string Config::path_fuente_general = "../../recursos/fuentes/OpenSans-Regular.ttf";
+
+string Config::audio_explosion = "../../recursos/audio/explosion.wav";

@@ -127,6 +127,7 @@ void Juego::verColisionChanclaConEnemigo(Chancletazo *chancla, Enemigo *enemigo)
         chancla->borrar = true;
         enemigo->borrar = true;
         enemigosEliminados++;
+        Motor::retMotor().retRenderizador()->reproducir();
     }
 }
 

@@ -9,6 +9,7 @@ Renderizador::Renderizador()
     texto_textura = nullptr;
     fuente_general = nullptr;
     fuente_fps = nullptr;
+    explosion = nullptr;
 }
 
 Renderizador::~Renderizador()
@@ -26,6 +27,8 @@ Renderizador::~Renderizador()
         TTF_CloseFont(fuente_general);
     if (fuente_fps != nullptr)
         TTF_CloseFont(fuente_fps);
+    if (explosion != nullptr)
+        Mix_FreeChunk(explosion);
 }
 
 void Renderizador::cargarTexturas(SDL_Window *ventana)
@@ -102,4 +105,23 @@ void Renderizador::dibujarTexto(SDL_Point comienzo, std::string texto, SDL_Color
 void Renderizador::retDimensionTexto(std::string texto, int *ancho, int *alto)
 {
     TTF_SizeText(fuente_general, texto.c_str(), ancho, alto);
+}
+
+void Renderizador::iniciarCargarAudio()
+{
+    if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1)
+    {
+        std::cout << "Error al abrir el audio..." << std::endl;
+        std::cout << Mix_GetError() << std::endl;
+        return;
+    }
+
+    explosion = Mix_LoadWAV(Config::audio_explosion.c_str());
+    if (!explosion)
+        std::cout << "No se ha cargado el audio para la explosion" << std::endl;
+}
+
+void Renderizador::reproducir()
+{
+    Mix_PlayChannel(1, explosion, 0);
 }
