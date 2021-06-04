@@ -4,7 +4,7 @@ LINUX:
 
 1. Descargar las librerías SDL2 necesarias:
    Ejemplo para Ubuntu y derivadas:   
-      sudo apt install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
+      sudo apt install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev libsdl2-mixer-dev
 
 2. Ejecutar el archivo Makefile en la carpeta Chancla:
    make
