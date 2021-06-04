@@ -33,7 +33,11 @@ class Config
 
     static string path_fuente_general;
 
+    // Ruta hacia el audio para la explosion
     static string audio_explosion;
+
+    // Ruta de la musica de fondo para el juego
+    static string musica_fondo;
 };
 
 

@@ -55,6 +55,7 @@ void Chancla::correr()
     motor.retRenderizador()->cargarFuentes();
     motor.retRenderizador()->iniciarCargarAudio();
 
+    motor.retRenderizador()->reproducirFondo();
     estado_juego = new Menu;
 
     Uint32 tultimo = SDL_GetTicks();

@@ -10,6 +10,7 @@ Renderizador::Renderizador()
     fuente_general = nullptr;
     fuente_fps = nullptr;
     explosion = nullptr;
+    musica_fondo = nullptr;
 }
 
 Renderizador::~Renderizador()
@@ -29,6 +30,12 @@ Renderizador::~Renderizador()
         TTF_CloseFont(fuente_fps);
     if (explosion != nullptr)
         Mix_FreeChunk(explosion);
+
+    // Detenemos la musica de fondo
+    Mix_HaltMusic();
+
+    if (musica_fondo != nullptr)
+        Mix_FreeMusic(musica_fondo);
 }
 
 void Renderizador::cargarTexturas(SDL_Window *ventana)
@@ -119,9 +126,17 @@ void Renderizador::iniciarCargarAudio()
     explosion = Mix_LoadWAV(Config::audio_explosion.c_str());
     if (!explosion)
         std::cout << "No se ha cargado el audio para la explosion" << std::endl;
+    musica_fondo = Mix_LoadMUS(Config::musica_fondo.c_str());
+    if (!musica_fondo)
+        std::cout << "No se ha cargado el audio para el fondo" << std::endl;
 }
 
 void Renderizador::reproducir()
 {
     Mix_PlayChannel(1, explosion, 0);
+}
+
+void Renderizador::reproducirFondo()
+{
+    Mix_PlayMusic(musica_fondo, -1);
 }

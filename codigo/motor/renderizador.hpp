@@ -32,6 +32,9 @@ class Renderizador
     // El sonido de explosion de los enemigos
     Mix_Chunk *explosion;
 
+    // La musica que suena de fondo para el juego
+    Mix_Music *musica_fondo;
+
   public:
 
     Renderizador();
@@ -76,6 +79,8 @@ class Renderizador
     // Reproducir el audio
     void reproducir();
 
+    // Reproducir la musica de fondo
+    void reproducirFondo();
 };
 
 

@@ -8,7 +8,7 @@ CC = g++
 LBANDERAS = -O
 CBANDERAS = -c -Wall -Wextra -std=c++17 -fPIC
 LIBS = -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
-RECURSOS = texturas/chanclas.png fuentes/OpenSans-Regular.ttf audio/explosion.wav
+RECURSOS = texturas/chanclas.png fuentes/OpenSans-Regular.ttf audio/explosion.wav audio/SolveThePuzzle.ogg
 DEBUG =
 
 MODULOS = motor  objetos estadojuego
